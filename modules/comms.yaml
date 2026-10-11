@@ -1,0 +1,6 @@
+description: choose your communication apps here
+packages:
+ #- telegram-desktop
+ #- thunderbird
+ # official client, needs RPMFusion nonfree:
+ #- discord

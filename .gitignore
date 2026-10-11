@@ -1,0 +1,5 @@
+*.rpm
+*.AppImage
+*.appimage
+build_files/project/
+__pycache__/

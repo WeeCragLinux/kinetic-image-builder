@@ -1,0 +1,16 @@
+name: kineticos-plus
+base_image: ghcr.io/theblack-don/kineticos:nvidia
+nvidia_base_image: null
+default_tag: latest
+enabled_modules:
+- base
+- rpmfusion
+- terra
+#- browsers
+#- content
+#- gaming
+#- comms
+#- terminals
+#- dev
+package_manager: dnf
+dotfiles: []

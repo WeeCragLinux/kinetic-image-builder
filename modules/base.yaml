@@ -1,0 +1,35 @@
+description: Base system packages and configuration
+packages:
+#- tmux
+#- dcli-bootc
+groups: []
+remove: []
+repos:
+  copr:
+  - theblackdon/dcli-bootc
+  rpm_urls: []
+  apt_lines: []
+  enable: []
+  import_keys: []
+remote_rpms: []
+local_rpms: []
+appimages: []
+flatpak_remotes: []
+flatpaks:
+#- com.spotify.Client
+#- com.vysp3r.ProtonPlus
+remove_flatpaks: []
+user_flatpak_remotes: []
+user_flatpaks: []
+user_remove_flatpaks: []
+files: []
+services:
+- bootc-fetch-apply-updates.timer
+first_boot_services: []
+scripts:
+  pre: |
+    mkdir -p /var/opt
+  post: |
+    rm -f /opt
+    mv /var/opt /opt
+depends: []
