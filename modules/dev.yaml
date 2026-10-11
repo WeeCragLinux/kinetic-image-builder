@@ -3,5 +3,5 @@ packages: []
 flatpaks:
  #- dev.zed.Zed
 scripts:
-  post: |
-    OPENCODE_INSTALL_DIR=/usr/bin curl -fsSL https://opencode.ai/install | bash
+  post:
+
