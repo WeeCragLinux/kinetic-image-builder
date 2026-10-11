@@ -1,11 +1,12 @@
 description: choose your gaming apps here
 packages:
- #- prismlauncher
-# - terra-mangohud
-# - goverlay
+ - prismlauncher
+ - terra-mangohud
  # preinstalled in base image — uncomment to layer anyway (needs RPMFusion nonfree):
  #- steam
  # - lutris
 repos:
   copr:
-   #- g3tchoo/prismlauncher
+   - g3tchoo/prismlauncher
+flatpaks:
+ - io.github.benjamimgois.goverlay
