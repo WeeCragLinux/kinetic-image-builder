@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ghcr.io/theblack-don/kineticos:stable
+ARG BASE_IMAGE=ghcr.io/theblack-don/kineticos:default
 
 FROM scratch AS ctx
 COPY build_files /

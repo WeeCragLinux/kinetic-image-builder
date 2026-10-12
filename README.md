@@ -1,6 +1,6 @@
 # kineticos-plus
 
-A modular bootc image based on `ghcr.io/theblack-don/kineticos:stable` by default.
+A modular bootc image based on `ghcr.io/theblack-don/kineticos:default` by default.
 Small always-on core, everything else opt-in: enable the modules you want,
 comment out the apps you don't.
 
@@ -16,11 +16,12 @@ Instead of editing the YAML by hand, run the configurator from the project folde
 ./kinetic-configurator
 ```
 
-It asks for a base image (`kineticos:stable` for AMD, `:nvidia` for Turing and newer
-NVIDIA cards, `:nvidia-legacy` for older NVIDIA cards), then walks through each module
-in `profile.yaml` order and lets you pick its apps. `base`, `rpmfusion` and `terra` are
-on by default. Selecting an app turns its module on. When it finishes, it writes
-`profile.yaml` and `modules/*.yaml` and runs `dcli-bootc gen`.
+It asks for a base image (`kineticos:default` for AMD and Intel, `:nvidia` for
+Turing and newer NVIDIA cards, `:nvidia-legacy` for older NVIDIA cards), then
+walks through each module in `profile.yaml` order and lets you pick its apps.
+`base`, `rpmfusion` and `terra` are on by default. Selecting an app turns its
+module on. When it finishes, it writes `profile.yaml` and `modules/*.yaml` and
+runs `dcli-bootc gen`.
 If none of the selected apps need RPM Fusion or Terra, the configurator offers the
 option to disable each unused module; they stay enabled unless you choose to disable them.
 
@@ -86,16 +87,16 @@ Some apps need their repo lines toggled alongside the package (brave,
 vivaldi) — the comments in each file say which lines belong together.
 After any change, re-run `dcli-bootc gen` before building.
 
-## Base image variants (stable / legacy Nvidia)
+## Base image variants
 
-The default is `ghcr.io/theblack-don/kineticos:stable` for AMD and Intel GPUs.
+The default is `ghcr.io/theblack-don/kineticos:default` for AMD and Intel GPUs.
 Run `./kinetic-configurator` to select the variant that matches your GPU:
-`:stable` for AMD and Intel, `:nvidia` for Turing and newer Nvidia GPUs, or
+`:default` for AMD and Intel, `:nvidia` for Turing and newer Nvidia GPUs, or
 `:nvidia-legacy` for older Nvidia GPUs. The configurator saves your selection
 to `profile.yaml` → `base_image:`. You can also change it manually:
 
 ```yaml
-base_image: ghcr.io/theblack-don/kineticos:stable
+base_image: ghcr.io/theblack-don/kineticos:default
 ```
 
 `profile.yaml` also has an `nvidia_base_image:` key (currently `null`).
