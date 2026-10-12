@@ -69,8 +69,10 @@ base image.
 
 ## Enable / disable apps
 
-Inside each `modules/*.yaml`, lines starting with `# -` are disabled.
-Uncomment the package line to install it; comment it to drop it:
+You can choose apps with the GUI configurator (`./kinetic-configurator`), or
+edit the module files manually. In each `modules/*.yaml`, lines starting with
+`# -` are disabled; uncomment a package line to install it, or comment it out
+to remove it:
 
 ```yaml
 packages:
