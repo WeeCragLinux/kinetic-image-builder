@@ -21,6 +21,8 @@ NVIDIA cards, `:nvidia-legacy` for older NVIDIA cards), then walks through each 
 in `profile.yaml` order and lets you pick its apps. `base`, `rpmfusion` and `terra` are
 on by default. Selecting an app turns its module on. When it finishes, it writes
 `profile.yaml` and `modules/*.yaml` and runs `dcli-bootc gen`.
+If none of the selected apps need RPM Fusion or Terra, the configurator offers the
+option to disable each unused module; they stay enabled unless you choose to disable them.
 
 Requires PySide6 (`python3 -c "import PySide6"` should work).
 
