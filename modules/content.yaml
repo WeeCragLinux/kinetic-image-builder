@@ -1,4 +1,4 @@
-description: choose your content creation apps here
+description: choose your content creation and media apps here
 packages:
  #- obs-studio
  #- audacity
@@ -8,3 +8,5 @@ packages:
  #- easyeffects
  #- vlc
  #- mpv
+flatpaks:
+  #- com.spotify.Client

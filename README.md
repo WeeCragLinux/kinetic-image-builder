@@ -46,10 +46,10 @@ before anything needing it.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
-| `base` | tmux, dcli-bootc, Spotify flatpak, update timer. Always on. | no |
+| `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Leave on unless minimal. | — (it *is* the repos) |
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | brave/vivaldi need their own repo setup (in-module); discord-style n/a |
-| `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv | yes (vlc, mpv) |
+| `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
 | `gaming` | prismlauncher, mangohud, goverlay; steam, lutris commented out | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole | no |
