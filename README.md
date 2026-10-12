@@ -56,25 +56,16 @@ before anything needing it.
 LGL System Loadout's kernel-changing feature does not work with this bootc-based
 image. Do not use it to switch kernels.
 
-## The usr-overlay (kinpkg) — a Kineticos feature, not used by this image
+## Kineticos usr-overlay (kinpkg)
 
-Kineticos supports a second install mechanism besides modules: the
-**usr-overlay**, managed by `kinpkg`. It is part of Kineticos, but is separate
-from this image's contents; this repo does not configure or use it. Overlay
-packages live in a `modules/overlay-packages.yaml` list (wired via `overlay_module:` /
-`overlay_backend:` in `profile.yaml`) and are populated with
-`dcli-bootc overlay import` from the base image's own overlay.
-Removing one from the list runs `kinpkg remove` on next build/update.
-Its purpose is tracking packages the *base image* ships (this repo used
-to carry `chromium` and `easyeffects` that way) so your customizations
-survive base updates without whiteout conflicts — `build.sh` snapshots
-the base package set for exactly this safety.
-
-This repo deliberately doesn't use it: every app comes through regular
-dnf modules (one mechanism, `chromium` via `browsers.yaml`,
-`easyeffects` via `content.yaml`). If you ever want it back, recreate
-`modules/overlay-packages.yaml`, restore the two `overlay_*` keys in
-`profile.yaml`, and run `dcli-bootc overlay import` + `dcli-bootc gen`.
+Kineticos provides the **usr-overlay** as a package-management layer alongside
+the base image; it is a Kineticos feature, not a separate image variant. The
+overlay is managed by `kinpkg`, which tracks overlay packages separately from
+the base image's packages. During builds and updates, `kinpkg` reconciles the
+overlay package set: packages added to the set are installed, and removed
+packages are uninstalled. This lets overlay-managed customizations persist
+across base-image updates while avoiding file conflicts with packages in the
+base image.
 
 ## Enable / disable apps
 
@@ -93,9 +84,11 @@ After any change, re-run `dcli-bootc gen` before building.
 
 ## Base image variants (stable / legacy Nvidia)
 
-Default is the `:stable` tag (`profile.yaml` → `base_image:`). The configurator
-only selects an Nvidia tag when you explicitly choose one. To change the base
-image manually, edit that line:
+The default is `ghcr.io/theblack-don/kineticos:stable` for AMD and Intel GPUs.
+Run `./kinetic-configurator` to select the variant that matches your GPU:
+`:stable` for AMD and Intel, `:nvidia` for Turing and newer Nvidia GPUs, or
+`:nvidia-legacy` for older Nvidia GPUs. The configurator saves your selection
+to `profile.yaml` → `base_image:`. You can also change it manually:
 
 ```yaml
 base_image: ghcr.io/theblack-don/kineticos:stable
