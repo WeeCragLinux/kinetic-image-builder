@@ -12,5 +12,6 @@ enabled_modules:
 #- comms
 #- terminals
 #- dev
+#- lgl-tools
 package_manager: dnf
 dotfiles: []

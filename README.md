@@ -51,6 +51,7 @@ before anything needing it.
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole | no |
 | `dev` | zed, opencode (via install script) | no |
+| `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Keychron Helper, Papercutter, Scheduler Manager | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |
 
 ## The usr-overlay (kinpkg) — not used here, but good to know
 
