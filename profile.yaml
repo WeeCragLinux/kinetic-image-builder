@@ -1,5 +1,5 @@
 name: kineticos-plus
-base_image: ghcr.io/theblack-don/kineticos:nvidia
+base_image: ghcr.io/theblack-don/kineticos:stable
 nvidia_base_image: null
 default_tag: latest
 enabled_modules:

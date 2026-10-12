@@ -1,6 +1,6 @@
 # kineticos-plus
 
-A modular bootc image based on `ghcr.io/theblack-don/kineticos:nvidia`.
+A modular bootc image based on `ghcr.io/theblack-don/kineticos:stable` by default.
 Small always-on core, everything else opt-in: enable the modules you want,
 comment out the apps you don't.
 
@@ -16,7 +16,7 @@ Instead of editing the YAML by hand, run the configurator from the project folde
 ./kinetic-configurator
 ```
 
-It asks for a base image (`kineticos:default` for AMD, `:nvidia` for Turing and newer
+It asks for a base image (`kineticos:stable` for AMD, `:nvidia` for Turing and newer
 NVIDIA cards, `:nvidia-legacy` for older NVIDIA cards), then walks through each module
 in `profile.yaml` order and lets you pick its apps. `base`, `rpmfusion` and `terra` are
 on by default. Selecting an app turns its module on. When it finishes, it writes
@@ -53,11 +53,15 @@ before anything needing it.
 | `dev` | zed, opencode (via install script) | no |
 | `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Keychron Helper, Papercutter, Scheduler Manager | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |
 
-## The usr-overlay (kinpkg) — not used here, but good to know
+LGL System Loadout's kernel-changing feature does not work with this bootc-based
+image. Do not use it to switch kernels.
 
-`dcli-bootc` has a second install mechanism besides modules: the
-**usr-overlay**, managed by `kinpkg`. Overlay packages live in a
-`modules/overlay-packages.yaml` list (wired via `overlay_module:` /
+## The usr-overlay (kinpkg) — a Kineticos feature, not used by this image
+
+Kineticos supports a second install mechanism besides modules: the
+**usr-overlay**, managed by `kinpkg`. It is part of Kineticos, but is separate
+from this image's contents; this repo does not configure or use it. Overlay
+packages live in a `modules/overlay-packages.yaml` list (wired via `overlay_module:` /
 `overlay_backend:` in `profile.yaml`) and are populated with
 `dcli-bootc overlay import` from the base image's own overlay.
 Removing one from the list runs `kinpkg remove` on next build/update.
@@ -89,8 +93,9 @@ After any change, re-run `dcli-bootc gen` before building.
 
 ## Base image variants (stable / legacy Nvidia)
 
-Default is the `:nvidia` tag (`profile.yaml` → `base_image:`). For a
-different Kineticos stream, change that one line:
+Default is the `:stable` tag (`profile.yaml` → `base_image:`). The configurator
+only selects an Nvidia tag when you explicitly choose one. To change the base
+image manually, edit that line:
 
 ```yaml
 base_image: ghcr.io/theblack-don/kineticos:stable

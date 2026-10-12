@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 BASE_IMAGES = (
-    "ghcr.io/theblack-don/kineticos:default",
+    "ghcr.io/theblack-don/kineticos:stable",
     "ghcr.io/theblack-don/kineticos:nvidia",
     "ghcr.io/theblack-don/kineticos:nvidia-legacy",
 )

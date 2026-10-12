@@ -18,7 +18,7 @@ from PySide6.QtWidgets import (
 from . import project
 
 BASE_DESCRIPTIONS = {
-    "ghcr.io/theblack-don/kineticos:default": "AMD GPUs",
+    "ghcr.io/theblack-don/kineticos:stable": "AMD and Intel GPUs",
     "ghcr.io/theblack-don/kineticos:nvidia": (
         "NVIDIA GPUs based on Turing or newer: GTX 16 series, and RTX 20, 30, 40 and 50 series"
     ),
