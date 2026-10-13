@@ -1,19 +1,19 @@
-description: choose your preferred browser/broswers here
+description: choose your preferred browsers here
 packages:
- #- helium-bin
- #- chromium
- #- firefox
- #- brave-browser
- #- brave-origin
- #- vivaldi-stable
+  #- helium-bin
+  #- chromium
+  #- firefox
+  #- brave-browser
+  #- brave-origin
+  #- vivaldi-stable
 repos:
   copr:
-   #- imput/helium
+    #- imput/helium
 scripts:
   pre: |
-    # Brave + Brave Origin share one repo
-    # https://brave.com/linux/ + https://brave.com/origin/linux/
-    #curl -fsSLo /etc/yum.repos.d/brave-browser.repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-    #rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    # Vivaldi - https://repo.vivaldi.com/stable/vivaldi-fedora.repo
-    dnf config-manager addrepo --from-repofile=https://repo.vivaldi.com/stable/vivaldi-fedora.repo
+    # This pre script runs before the browser packages are installed.
+    # Uncomment this repo command when enabling either Brave package above:
+    # Brave + Brave Origin share this Fedora/DNF5 repo.
+    # dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    # Uncomment this repo command only when enabling vivaldi-stable above:
+    # dnf config-manager addrepo --from-repofile=https://repo.vivaldi.com/stable/vivaldi-fedora.repo

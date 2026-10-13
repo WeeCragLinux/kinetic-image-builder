@@ -11,8 +11,8 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 ## Configure
 
 Edit `profile.yaml` to enable or disable modules, and edit `modules/*.yaml` to
-choose apps. `base`, `rpmfusion`, and the Terra repositories are enabled by
-default; gaming apps are commented out. The configurator is distributed
+choose apps. Only `base` is enabled by default. Enable RPMFusion or Terra only
+when one of your selected apps needs it. The configurator is distributed
 separately as an RPM; it is not included in this image or repository checkout.
 
 ## Build
@@ -29,15 +29,15 @@ deployment pinned so you can roll back).
 ## Modules
 
 Toggle in `profile.yaml` under `enabled_modules:` (comment a line out to
-disable that whole module). Order matters: `base` first, `rpmfusion`
-before anything needing it.
+disable that whole module). Order matters: `base` first, then `rpmfusion` or
+`terra` before any apps that need those repositories.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
 | `base` | update timer. Always on. | no |
-| `rpmfusion` | RPMFusion free + nonfree repos. Leave on unless minimal. | — (it *is* the repos) |
-| `terra` | Terra repositories. Enabled by default; no apps installed by this module. | no |
-| `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | brave/vivaldi need their own repo setup (in-module) |
+| `rpmfusion` | RPMFusion free + nonfree repos. Optional. | — (it *is* the repos) |
+| `terra` | Terra repositories; enable for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
+| `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
 | `gaming` | prismlauncher, terra-mangohud, goverlay, steam, lutris (all commented out by default) | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
@@ -71,20 +71,28 @@ packages:
  # - vlc
 ```
 
-Some apps need their repo lines toggled alongside the package (brave,
-vivaldi) — the comments in each file say which lines belong together.
-After any change, re-run `dcli-bootc gen` before building.
+Some apps need their repo commands toggled alongside the package. In
+`modules/browsers.yaml`, Brave Browser and Brave Origin share one repo command;
+Vivaldi has a separate command. Uncomment a repo command only when enabling its
+corresponding package(s). The browser module's pre script adds the repo before
+DNF installs those packages. After any change, re-run `dcli-bootc gen` before
+building.
 
 ## Base image variants
 
 The default is `ghcr.io/theblack-don/kineticos:default` for AMD and Intel GPUs.
 Set `profile.yaml` → `base_image:` to choose the variant that matches your GPU:
 `:default` for AMD and Intel, `:nvidia` for Turing and newer Nvidia GPUs, or
-`:nvidia-legacy` for older Nvidia GPUs:
+`:nvidia-legacy` for older Nvidia GPUs. `ghcr.io/theblack-don/kineticos:deck`
+is also selectable, but it is very early and not recommended for normal use:
 
 ```yaml
 base_image: ghcr.io/theblack-don/kineticos:default
 ```
+
+To try the experimental Deck image, replace that value with
+`ghcr.io/theblack-don/kineticos:deck`; expect instability and use it only if
+you are willing to troubleshoot early-development issues.
 
 `profile.yaml` also has an `nvidia_base_image:` key (currently `null`).
 Its exact semantics depend on your dcli-bootc version — check

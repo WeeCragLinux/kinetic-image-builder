@@ -1,11 +1,14 @@
 name: kineticos-plus
 base_image: ghcr.io/theblack-don/kineticos:default
+# Experimental, very early, and not recommended for normal use:
+# ghcr.io/theblack-don/kineticos:deck
 nvidia_base_image: null
 default_tag: latest
 enabled_modules:
 - base
-- rpmfusion
-- terra
+# Optional repos: uncomment when a selected app needs them.
+#- rpmfusion  # vlc, mpv, steam, Discord, and other RPMFusion packages
+#- terra     # terra-mangohud and other Terra packages
 #- browsers
 #- content
 #- gaming
