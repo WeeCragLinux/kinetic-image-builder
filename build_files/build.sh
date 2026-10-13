@@ -5,6 +5,14 @@ set -euo pipefail
 # Profile: kineticos-plus
 
 
+# === removals: Remove unwanted preinstalled applications ===
+
+dnf remove -y \
+    dolphin \
+    spectacle \
+    konsole \
+    alacritty
+
 # === base: Base system packages and configuration ===
 
 # pre script (base)

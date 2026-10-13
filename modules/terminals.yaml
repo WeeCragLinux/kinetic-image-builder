@@ -1,4 +1,7 @@
 description: choose your preferred terminal here
 packages:
- #- kitty
- #- konsole
+  # - kitty
+  # - konsole
+  # - alacritty
+  # - foot
+  # - ghostty

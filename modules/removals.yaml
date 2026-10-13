@@ -1,0 +1,7 @@
+description: Remove unwanted preinstalled applications
+packages: []
+remove:
+  - dolphin
+  - spectacle
+  - konsole
+  - alacritty

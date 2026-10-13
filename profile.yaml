@@ -6,17 +6,20 @@ nvidia_base_image: null
 default_tag: latest
 # Keep every module listed here so the configurator can offer its apps.
 # App modules stay disabled until the user selects apps from their tab.
-# RPMFusion and Terra start enabled; the configurator can offer to disable
-# either at the end when none of the selected apps need it.
+# Removals is listed first. Base, RPMFusion, and Terra also start enabled;
+# the configurator can offer to disable either repo module when unneeded.
 enabled_modules:
+- removals
 - base
 - rpmfusion
 - terra
 #- browsers
 #- content
+#- file-managers
 #- gaming
 #- comms
 #- terminals
+#- screenshot-tools
 #- dev
 #- lgl-tools
 package_manager: dnf

@@ -11,10 +11,10 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 ## Configure
 
 Edit `profile.yaml` to choose the base image and module defaults, and edit
-`modules/*.yaml` to choose apps. `base`, `rpmfusion`, and `terra` are enabled by
-default; app modules are listed but disabled until apps are selected. The
-configurator is distributed separately as an RPM; it is not included in this
-image or repository checkout.
+`modules/*.yaml` to choose apps. `removals`, `base`, `rpmfusion`, and `terra`
+are enabled by default; app modules are listed but disabled until apps are
+selected. The configurator is distributed separately as an RPM; it is not
+included in this image or repository checkout.
 
 ## Build
 
@@ -30,21 +30,31 @@ deployment pinned so you can roll back).
 ## Modules
 
 `profile.yaml` lists all modules under `enabled_modules:` so the configurator
-can offer their app choices. `base`, `rpmfusion`, and `terra` are enabled by
-default; app modules are commented out and should only be enabled when an app
-from that module is selected. Order matters: `base` first, then `rpmfusion` or
-`terra` before any apps that need those repositories.
+can offer their app choices. `removals`, `base`, `rpmfusion`, and `terra` are
+enabled by default; app modules are commented out and should only be enabled
+when an app from that module is selected. `removals` is listed first, followed
+by `base`; keep `rpmfusion` or `terra` before any apps that need those
+repositories. Because removals run first, selecting one of those apps in
+another module (such as Dolphin or Spectacle) installs it afterward.
+
+By default, the image includes no file manager, terminal emulator, or
+screenshot tool. The removals module removes Dolphin, Konsole, Alacritty, and
+Spectacle; the `file-managers`, `terminals`, and `screenshot-tools` modules are
+opt-in, with their package choices commented out until selected.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
+| `removals` | Removes preinstalled dolphin, spectacle, konsole, and alacritty | no |
 | `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Enabled by default; disable if no selected app needs them. | — (it *is* the repos) |
 | `terra` | Terra repositories. Enabled by default; needed for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
+| `file-managers` | Thunar, Nautilus, PCManFM-Qt, Dolphin (commented out) | no |
 | `gaming` | prismlauncher, terra-mangohud, goverlay, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
-| `terminals` | kitty, konsole | no |
+| `terminals` | kitty, konsole, alacritty, foot, ghostty (commented out) | no |
+| `screenshot-tools` | Flameshot, Shutter, Spectacle (commented out) | no |
 | `dev` | Zed Flatpak (commented out) | no |
 | `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Keychron Helper, Papercutter, Scheduler Manager | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |
 
