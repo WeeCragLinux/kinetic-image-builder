@@ -35,16 +35,17 @@ enabled by default; app modules are commented out and should only be enabled
 when an app from that module is selected. `removals` is listed first, followed
 by `base`; keep `rpmfusion` or `terra` before any apps that need those
 repositories. Because removals run first, selecting one of those apps in
-another module (such as Dolphin or Spectacle) installs it afterward.
+another module (such as Dolphin, KWrite, or Spectacle) installs it afterward.
 
-By default, the image includes no file manager, terminal emulator, or
-screenshot tool. The removals module removes Dolphin, Konsole, Alacritty, and
-Spectacle; the `file-managers`, `terminals`, and `screenshot-tools` modules are
-opt-in, with their package choices commented out until selected.
+By default, the image includes no file manager or screenshot tool. Alacritty
+remains installed as a fallback terminal. The removals module removes Dolphin,
+Konsole, KWrite, and Spectacle; the `file-managers`, `terminals`,
+`text-editors`, and `screenshot-tools` modules are opt-in, with their package
+choices commented out until selected.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
-| `removals` | Removes preinstalled dolphin, spectacle, konsole, and alacritty | no |
+| `removals` | Removes preinstalled dolphin, spectacle, konsole, and kwrite | no |
 | `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Enabled by default; disable if no selected app needs them. | — (it *is* the repos) |
 | `terra` | Terra repositories. Enabled by default; needed for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
@@ -53,7 +54,8 @@ opt-in, with their package choices commented out until selected.
 | `file-managers` | Thunar, Nautilus, PCManFM-Qt, Dolphin (commented out) | no |
 | `gaming` | prismlauncher, terra-mangohud, goverlay, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
-| `terminals` | kitty, konsole, alacritty, foot, ghostty (commented out) | no |
+| `terminals` | kitty, konsole, foot, ghostty (commented out); Alacritty remains installed as a fallback | no |
+| `text-editors` | KWrite, Kate, GNOME Text Editor, Mousepad (commented out) | no |
 | `screenshot-tools` | Flameshot, Shutter, Spectacle (commented out) | no |
 | `dev` | Zed Flatpak (commented out) | no |
 | `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Keychron Helper, Papercutter, Scheduler Manager | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |

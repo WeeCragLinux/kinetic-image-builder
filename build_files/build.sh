@@ -11,7 +11,7 @@ dnf remove -y \
     dolphin \
     spectacle \
     konsole \
-    alacritty
+    kwrite
 
 # === base: Base system packages and configuration ===
 

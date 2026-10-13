@@ -19,6 +19,7 @@ enabled_modules:
 #- gaming
 #- comms
 #- terminals
+#- text-editors
 #- screenshot-tools
 #- dev
 #- lgl-tools

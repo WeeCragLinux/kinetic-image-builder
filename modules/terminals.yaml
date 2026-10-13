@@ -2,6 +2,5 @@ description: choose your preferred terminal here
 packages:
   # - kitty
   # - konsole
-  # - alacritty
   # - foot
   # - ghostty
