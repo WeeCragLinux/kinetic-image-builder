@@ -19,6 +19,9 @@ Instead of editing the YAML by hand, run the configurator from the project folde
 It asks for a base image (`kineticos:default` for AMD and Intel, `:nvidia` for
 Turing and newer NVIDIA cards, `:nvidia-legacy` for older NVIDIA cards), then
 walks through each module in `profile.yaml` order and lets you pick its apps.
+At launch, it also finds YAML modules that are missing from `profile.yaml` and
+asks which ones to add. Newly added modules stay disabled unless you select
+apps from them.
 `base`, `rpmfusion` and `terra` are on by default. Selecting an app turns its
 module on. When it finishes, it writes `profile.yaml` and `modules/*.yaml` and
 runs `dcli-bootc gen`.
@@ -48,12 +51,12 @@ before anything needing it.
 |---|---|---|
 | `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Leave on unless minimal. | — (it *is* the repos) |
-| `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | brave/vivaldi need their own repo setup (in-module); discord-style n/a |
+| `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | brave/vivaldi need their own repo setup (in-module) |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
 | `gaming` | prismlauncher, mangohud, goverlay; steam, lutris commented out | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole | no |
-| `dev` | zed, opencode (via install script) | no |
+| `dev` | Zed Flatpak (commented out) | no |
 | `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Keychron Helper, Papercutter, Scheduler Manager | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |
 
 LGL System Loadout's kernel-changing feature does not work with this bootc-based
@@ -113,4 +116,10 @@ one-line `base_image:` edit above always works regardless.
   bash scripts/apply-fastfetch-config.sh --system  # also /etc default (needs sudo)
   ```
   The script also offers bash auto-run in new terminals.
-- **Flatpaks:** listed under `flatpaks:` per module (see Spotify in `base`).
+- **Flatpaks:** listed under `flatpaks:` per module (see Spotify in `content`).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). It covers this
+repository's original content; Kineticos, dcli-bootc, and third-party packages
+and repositories remain under their own terms.
