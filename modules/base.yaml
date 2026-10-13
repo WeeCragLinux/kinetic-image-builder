@@ -16,7 +16,6 @@ local_rpms: []
 appimages: []
 flatpak_remotes: []
 flatpaks:
-#- com.vysp3r.ProtonPlus
 remove_flatpaks: []
 user_flatpak_remotes: []
 user_flatpaks: []

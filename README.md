@@ -14,8 +14,7 @@ Edit `profile.yaml` to choose the base image and module defaults, and edit
 `modules/*.yaml` to choose apps. `base`, `rpmfusion`, and `terra` are enabled by
 default; app modules are listed but disabled until apps are selected. The
 configurator is distributed separately as an RPM; it is not included in this
-image or repository checkout. See `CONFIGURATOR_FIX_PROMPT.md` for the requested
-configurator changes.
+image or repository checkout.
 
 ## Build
 
@@ -43,7 +42,7 @@ from that module is selected. Order matters: `base` first, then `rpmfusion` or
 | `terra` | Terra repositories. Enabled by default; needed for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
-| `gaming` | prismlauncher, terra-mangohud, goverlay, steam, lutris (all commented out by default) | yes (if steam uncommented) |
+| `gaming` | prismlauncher, terra-mangohud, goverlay, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole | no |
 | `dev` | Zed Flatpak (commented out) | no |

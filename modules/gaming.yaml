@@ -10,3 +10,4 @@ repos:
     #- g3tchoo/prismlauncher
 flatpaks:
   #- io.github.benjamimgois.goverlay
+  #- com.vysp3r.ProtonPlus
