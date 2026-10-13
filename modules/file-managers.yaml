@@ -1,5 +1,4 @@
 description: choose your preferred file manager here
 packages:
-  # - thunar
   # - nautilus
   # - pcmanfm-qt
