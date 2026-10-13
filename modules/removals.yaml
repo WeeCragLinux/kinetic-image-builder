@@ -1,8 +1,8 @@
 description: Remove unwanted preinstalled applications
 packages: []
-remove: []
+remove:
 # Optional removal choices; uncomment only packages the user selected.
-# - dolphin
-# - spectacle
-# - konsole
-# - kwrite
+ #- dolphin
+ #- spectacle
+ #- konsole
+ #- kwrite
