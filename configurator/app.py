@@ -3,10 +3,15 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
+    QDialog,
+    QDialogButtonBox,
     QLabel,
+    QListWidget,
+    QListWidgetItem,
     QMessageBox,
     QPlainTextEdit,
     QRadioButton,
@@ -156,6 +161,7 @@ class Wizard(QWizard):
         self.root = root
         self.profile = project.Profile(root)
         self.modules = project.load_modules(root)
+        self.add_new_modules()
         self.state = project.Selection()
         self.page_ids: dict[QWizardPage, int] = {}
 
@@ -181,6 +187,50 @@ class Wizard(QWizard):
         self.review_page = ReviewPage(self)
         self.add_page(self.review_page)
 
+    def add_new_modules(self) -> None:
+        known = {name for name, _ in self.profile.entries}
+        new_modules = sorted(set(self.modules) - known - {"base"})
+        if not new_modules:
+            return
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("New modules found")
+        dialog.setMinimumWidth(380)
+        layout = QVBoxLayout(dialog)
+        message = QLabel(
+            "Select the modules to add to profile.yaml. App modules will remain "
+            "disabled unless you select apps from them in the wizard."
+        )
+        message.setWordWrap(True)
+        layout.addWidget(message)
+
+        module_list = QListWidget(dialog)
+        for name in new_modules:
+            item = QListWidgetItem(name)
+            item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
+            item.setCheckState(Qt.CheckState.Unchecked)
+            item.setToolTip(self.modules[name].description)
+            module_list.addItem(item)
+        layout.addWidget(module_list)
+
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel,
+            parent=dialog,
+        )
+        buttons.button(QDialogButtonBox.StandardButton.Ok).setText("Add selected")
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+        selected = [
+            module_list.item(index).text()
+            for index in range(module_list.count())
+            if module_list.item(index).checkState() == Qt.CheckState.Checked
+        ]
+        self.profile.entries.extend((name, False) for name in selected)
+
     def add_page(self, page: QWizardPage) -> None:
         page_id = len(self.page_ids)
         self.page_ids[page] = page_id
@@ -195,7 +245,7 @@ class Wizard(QWizard):
 
     def accept(self) -> None:
         try:
-            project.apply(self.root, self.state, self.modules)
+            project.apply(self.root, self.state, self.modules, self.profile)
         except OSError as error:
             QMessageBox.critical(self, "Could not write files", str(error))
             return

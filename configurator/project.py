@@ -166,8 +166,12 @@ def resolve(profile: Profile, selection: Selection) -> list[tuple[str, bool]]:
     return result
 
 
-def apply(root: Path, selection: Selection, modules: dict[str, Module]) -> None:
-    profile = Profile(root)
+def apply(
+    root: Path,
+    selection: Selection,
+    modules: dict[str, Module],
+    profile: Profile,
+) -> None:
     entries = resolve(profile, selection)
     for name, on in entries:
         module = modules.get(name)
