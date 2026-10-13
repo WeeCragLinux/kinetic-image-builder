@@ -8,27 +8,12 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 `build_files/build.sh` is generated — edit `modules/*.yaml`, then run
 `dcli-bootc gen`.
 
-## Configure (GUI)
+## Configure
 
-Instead of editing the YAML by hand, run the configurator from the project folder:
-
-```bash
-./kinetic-configurator
-```
-
-It asks for a base image (`kineticos:default` for AMD and Intel, `:nvidia` for
-Turing and newer NVIDIA cards, `:nvidia-legacy` for older NVIDIA cards), then
-walks through each module in `profile.yaml` order and lets you pick its apps.
-At launch, it also finds YAML modules that are missing from `profile.yaml` and
-asks which ones to add. Newly added modules stay disabled unless you select
-apps from them.
-`base`, `rpmfusion` and `terra` are on by default. Selecting an app turns its
-module on. When it finishes, it writes `profile.yaml` and `modules/*.yaml` and
-runs `dcli-bootc gen`.
-If none of the selected apps need RPM Fusion or Terra, the configurator offers the
-option to disable each unused module; they stay enabled unless you choose to disable them.
-
-Requires PySide6 (`python3 -c "import PySide6"` should work).
+Edit `profile.yaml` to enable or disable modules, and edit `modules/*.yaml` to
+choose apps. `base`, `rpmfusion`, and the Terra repositories are enabled by
+default; gaming apps are commented out. The configurator is distributed
+separately as an RPM; it is not included in this image or repository checkout.
 
 ## Build
 
@@ -51,9 +36,10 @@ before anything needing it.
 |---|---|---|
 | `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Leave on unless minimal. | — (it *is* the repos) |
+| `terra` | Terra repositories. Enabled by default; no apps installed by this module. | no |
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | brave/vivaldi need their own repo setup (in-module) |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
-| `gaming` | prismlauncher, mangohud, goverlay; steam, lutris commented out | yes (if steam uncommented) |
+| `gaming` | prismlauncher, terra-mangohud, goverlay, steam, lutris (all commented out by default) | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole | no |
 | `dev` | Zed Flatpak (commented out) | no |
@@ -75,10 +61,9 @@ base image.
 
 ## Enable / disable apps
 
-You can choose apps with the GUI configurator (`./kinetic-configurator`), or
-edit the module files manually. In each `modules/*.yaml`, lines starting with
-`# -` are disabled; uncomment a package line to install it, or comment it out
-to remove it:
+Edit the module files to choose apps. In each `modules/*.yaml`, commented-out
+entries are disabled; uncomment an entry to enable it, or comment it out to
+remove it:
 
 ```yaml
 packages:
@@ -93,10 +78,9 @@ After any change, re-run `dcli-bootc gen` before building.
 ## Base image variants
 
 The default is `ghcr.io/theblack-don/kineticos:default` for AMD and Intel GPUs.
-Run `./kinetic-configurator` to select the variant that matches your GPU:
+Set `profile.yaml` → `base_image:` to choose the variant that matches your GPU:
 `:default` for AMD and Intel, `:nvidia` for Turing and newer Nvidia GPUs, or
-`:nvidia-legacy` for older Nvidia GPUs. The configurator saves your selection
-to `profile.yaml` → `base_image:`. You can also change it manually:
+`:nvidia-legacy` for older Nvidia GPUs:
 
 ```yaml
 base_image: ghcr.io/theblack-don/kineticos:default

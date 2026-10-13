@@ -25,11 +25,5 @@ dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-
 sed -i 's/enabled=0/enabled=1/' /etc/yum.repos.d/terra.repo
 sed -i 's/enabled=0/enabled=1/' /etc/yum.repos.d/terra-extras.repo
 
-# === gaming: choose your gaming apps here ===
-
-dnf install -y \
-    terra-mangohud \
-    goverlay
-
 # === cleanup ===
 dnf clean all && rm -rf /var/cache/dnf/*
