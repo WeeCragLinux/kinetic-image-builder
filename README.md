@@ -11,10 +11,11 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 ## Configure
 
 Edit `profile.yaml` to choose the base image and module defaults, and edit
-`modules/*.yaml` to choose apps. `removals`, `base`, `rpmfusion`, and `terra`
-are enabled by default; app modules are listed but disabled until apps are
-selected. The configurator is distributed separately as an RPM; it is not
-included in this image or repository checkout.
+`modules/*.yaml` to choose apps and optional removals. `base`, `rpmfusion`, and
+`terra` are enabled by default. Removals and app modules are listed but disabled
+until the user selects choices; no packages are removed by default. The
+configurator is distributed separately as an RPM; it is not included in this
+image or repository checkout.
 
 ## Build
 
@@ -30,22 +31,24 @@ deployment pinned so you can roll back).
 ## Modules
 
 `profile.yaml` lists all modules under `enabled_modules:` so the configurator
-can offer their app choices. `removals`, `base`, `rpmfusion`, and `terra` are
-enabled by default; app modules are commented out and should only be enabled
-when an app from that module is selected. `removals` is listed first, followed
-by `base`; keep `rpmfusion` or `terra` before any apps that need those
-repositories. Because removals run first, selecting one of those apps in
-another module (such as Dolphin, KWrite, or Spectacle) installs it afterward.
+can offer their app or removal choices. `base`, `rpmfusion`, and `terra` are
+enabled by default; removals and app modules are commented out and should only
+be enabled when the user selects choices from them. The `removals` module is
+listed first so selected removals run before `base` and app modules. Keep
+`rpmfusion` or `terra` before any apps that need those repositories. If a
+package is selected for both removal and installation, the later app module
+installs it afterward.
 
-By default, the image includes no file manager or screenshot tool. Alacritty
-remains installed as a fallback terminal. The removals module removes Dolphin,
-Konsole, KWrite, and Spectacle; the `file-managers`, `terminals`,
-`text-editors`, and `screenshot-tools` modules are opt-in, with their package
-choices commented out until selected.
+No packages are removed by default, so preinstalled apps from the base image
+remain unless selected for removal. Alacritty remains installed as a fallback
+terminal. The optional removals module offers Dolphin, Spectacle, Konsole, and
+KWrite; each removal choice is commented out until selected. The
+`file-managers`, `terminals`, `text-editors`, and `screenshot-tools` modules are
+also opt-in.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
-| `removals` | Removes preinstalled dolphin, spectacle, konsole, and kwrite | no |
+| `removals` | Optional removal of preinstalled Dolphin, Spectacle, Konsole, and KWrite; none by default | no |
 | `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Enabled by default; disable if no selected app needs them. | — (it *is* the repos) |
 | `terra` | Terra repositories. Enabled by default; needed for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
