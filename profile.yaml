@@ -4,11 +4,14 @@ base_image: ghcr.io/theblack-don/kineticos:default
 # ghcr.io/theblack-don/kineticos:deck
 nvidia_base_image: null
 default_tag: latest
+# Keep every module listed here so the configurator can offer its apps.
+# App modules stay disabled until the user selects apps from their tab.
+# RPMFusion and Terra start enabled; the configurator can offer to disable
+# either at the end when none of the selected apps need it.
 enabled_modules:
 - base
-# Optional repos: uncomment when a selected app needs them.
-#- rpmfusion  # vlc, mpv, steam, Discord, and other RPMFusion packages
-#- terra     # terra-mangohud and other Terra packages
+- rpmfusion
+- terra
 #- browsers
 #- content
 #- gaming

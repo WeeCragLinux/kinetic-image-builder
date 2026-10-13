@@ -10,10 +10,12 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 
 ## Configure
 
-Edit `profile.yaml` to enable or disable modules, and edit `modules/*.yaml` to
-choose apps. Only `base` is enabled by default. Enable RPMFusion or Terra only
-when one of your selected apps needs it. The configurator is distributed
-separately as an RPM; it is not included in this image or repository checkout.
+Edit `profile.yaml` to choose the base image and module defaults, and edit
+`modules/*.yaml` to choose apps. `base`, `rpmfusion`, and `terra` are enabled by
+default; app modules are listed but disabled until apps are selected. The
+configurator is distributed separately as an RPM; it is not included in this
+image or repository checkout. See `CONFIGURATOR_FIX_PROMPT.md` for the requested
+configurator changes.
 
 ## Build
 
@@ -28,15 +30,17 @@ deployment pinned so you can roll back).
 
 ## Modules
 
-Toggle in `profile.yaml` under `enabled_modules:` (comment a line out to
-disable that whole module). Order matters: `base` first, then `rpmfusion` or
+`profile.yaml` lists all modules under `enabled_modules:` so the configurator
+can offer their app choices. `base`, `rpmfusion`, and `terra` are enabled by
+default; app modules are commented out and should only be enabled when an app
+from that module is selected. Order matters: `base` first, then `rpmfusion` or
 `terra` before any apps that need those repositories.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
 | `base` | update timer. Always on. | no |
-| `rpmfusion` | RPMFusion free + nonfree repos. Optional. | — (it *is* the repos) |
-| `terra` | Terra repositories; enable for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
+| `rpmfusion` | RPMFusion free + nonfree repos. Enabled by default; disable if no selected app needs them. | — (it *is* the repos) |
+| `terra` | Terra repositories. Enabled by default; needed for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
 | `gaming` | prismlauncher, terra-mangohud, goverlay, steam, lutris (all commented out by default) | yes (if steam uncommented) |
@@ -71,12 +75,12 @@ packages:
  # - vlc
 ```
 
-Some apps need their repo commands toggled alongside the package. In
+Some apps need their repo commands enabled alongside the package. In
 `modules/browsers.yaml`, Brave Browser and Brave Origin share one repo command;
-Vivaldi has a separate command. Uncomment a repo command only when enabling its
-corresponding package(s). The browser module's pre script adds the repo before
-DNF installs those packages. After any change, re-run `dcli-bootc gen` before
-building.
+Vivaldi has a separate command. The browser module's pre script adds the repo
+before DNF installs those packages. Until the separate configurator is updated,
+when editing YAML manually, uncomment only the repo command for each selected
+browser. After any change, re-run `dcli-bootc gen` before building.
 
 ## Base image variants
 
