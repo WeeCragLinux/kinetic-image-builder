@@ -1,7 +1,7 @@
 description: Base system packages and configuration
 packages:
-#- tmux
-#- dcli-bootc
+- tmux
+- dcli-bootc
 groups: []
 remove: []
 repos:

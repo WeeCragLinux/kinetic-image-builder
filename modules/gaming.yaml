@@ -2,9 +2,11 @@ description: choose your gaming apps here
 packages:
  #- prismlauncher
  #- terra-mangohud
+ #- mangohud
+ #- gamemode
  # preinstalled in base image — uncomment to layer anyway (needs RPMFusion nonfree):
  #- steam
- # - lutris
+ #- lutris
 repos:
   copr:
     #- g3tchoo/prismlauncher
