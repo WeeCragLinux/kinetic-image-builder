@@ -6,7 +6,11 @@ remove:
  #- spectacle
  #- konsole
  #- kwrite
- #- kwalletmanager5
- #- krdc
  #- kate
- #- xrpb
+ # kjournald
+ #- kdebugsettings
+ #- kfind
+ #- krdc
+ #- krfb
+ #- kwalletmanager5
+
