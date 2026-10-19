@@ -2,7 +2,6 @@ description: choose your gaming apps here
 packages:
  #- prismlauncher
  #- mangohud
- #- gamemode
  #- goverlay
  # preinstalled in base image — uncomment to layer anyway (needs RPMFusion nonfree):
  #- steam
