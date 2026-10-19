@@ -13,7 +13,6 @@ enabled_modules:
 #- removals
 - base
 - rpmfusion
-- terra
 #- browsers
 #- content
 #- file-managers

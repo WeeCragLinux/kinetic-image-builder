@@ -4,7 +4,6 @@ packages:
   #- lgl-colour-picker
   #- lgl-dnf-helper
   #- lgl-emoji-picker
-  #- lgl-keychron-helper
   #- lgl-papercutter
   #- lgl-scheduler-manager
 repos:

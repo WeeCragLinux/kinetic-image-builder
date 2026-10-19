@@ -12,7 +12,7 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 
 Edit `profile.yaml` to choose the base image and module defaults, and edit
 `modules/*.yaml` to choose apps and optional removals. `base`, `rpmfusion`, and
-`terra` are enabled by default. Removals and app modules are listed but disabled
+are enabled by default. Removals and app modules are listed but disabled
 until the user selects choices; no packages are removed by default. The
 configurator is distributed separately as an RPM; it is not included in this
 image or repository checkout.
@@ -31,11 +31,11 @@ deployment pinned so you can roll back).
 ## Modules
 
 `profile.yaml` lists all modules under `enabled_modules:` so the configurator
-can offer their app or removal choices. `base`, `rpmfusion`, and `terra` are
+can offer their app or removal choices. `base`, `rpmfusion`, are
 enabled by default; removals and app modules are commented out and should only
 be enabled when the user selects choices from them. The `removals` module is
 listed first so selected removals run before `base` and app modules. Keep
-`rpmfusion` or `terra` before any apps that need those repositories. If a
+`rpmfusion` or before any apps that need those repositories. If a
 package is selected for both removal and installation, the later app module
 installs it afterward.
 
@@ -51,11 +51,10 @@ also opt-in.
 | `removals` | Optional removal of preinstalled Dolphin, Spectacle, Konsole, and KWrite; none by default | no |
 | `base` | update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Enabled by default; disable if no selected app needs them. | — (it *is* the repos) |
-| `terra` | Terra repositories. Enabled by default; needed for `terra-mangohud` and other Terra packages. No apps installed by this module. | no |
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
 | `file-managers` | Thunar, Nautilus, PCManFM-Qt, Dolphin (commented out) | no |
-| `gaming` | prismlauncher, terra-mangohud, goverlay, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
+| `gaming` | prismlauncher, mangohud, goverlay, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole, foot, ghostty (commented out); Alacritty remains installed as a fallback | no |
 | `text-editors` | KWrite, Kate, GNOME Text Editor, Mousepad (commented out) | no |
