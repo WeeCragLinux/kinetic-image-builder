@@ -11,7 +11,7 @@ Built with [dcli-bootc](https://copr.fedorainfracloud.org/coprs/theblackdon/dcli
 ## Configure
 
 Edit `profile.yaml` to choose the base image and module defaults, and edit
-`modules/*.yaml` to choose apps and optional removals. `base`, `rpmfusion`, and
+`modules/*.yaml` to choose apps and optional removals. `base` and `rpmfusion`
 are enabled by default. Removals and app modules are listed but disabled
 until the user selects choices; no packages are removed by default. The
 configurator is distributed separately as an RPM; it is not included in this
@@ -31,11 +31,11 @@ deployment pinned so you can roll back).
 ## Modules
 
 `profile.yaml` lists all modules under `enabled_modules:` so the configurator
-can offer their app or removal choices. `base`, `rpmfusion`, are
+can offer their app or removal choices. `base` and `rpmfusion` are
 enabled by default; removals and app modules are commented out and should only
 be enabled when the user selects choices from them. The `removals` module is
 listed first so selected removals run before `base` and app modules. Keep
-`rpmfusion` or before any apps that need those repositories. If a
+`rpmfusion` before any apps that need those repositories. If a
 package is selected for both removal and installation, the later app module
 installs it afterward.
 
@@ -54,7 +54,8 @@ also opt-in.
 | `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
 | `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
 | `file-managers` | Thunar, Nautilus, PCManFM-Qt, Dolphin (commented out) | no |
-| `gaming` | prismlauncher, mangohud, goverlay, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
+| `gaming` | prismlauncher, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
+| `mangohud` | Fedora MangoHud + Goverlay (commented out by default) | no |
 | `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
 | `terminals` | kitty, konsole, foot, ghostty (commented out); Alacritty remains installed as a fallback | no |
 | `text-editors` | KWrite, Kate, GNOME Text Editor, Mousepad (commented out) | no |
@@ -126,6 +127,12 @@ one-line `base_image:` edit above always works regardless.
   ```
   The script also offers bash auto-run in new terminals.
 - **Flatpaks:** listed under `flatpaks:` per module (see Spotify in `content`).
+  `dcli-bootc` installs them with `flatpak --user` into the invoking user's
+  home; they are deliberately not baked into the image, because `/var/lib/flatpak`
+  is machine-local state under bootc. Run `dcli-bootc build` as your normal
+  user, not with `sudo`, or the Flatpaks will be installed for root instead.
+  If they need to be applied separately, run
+  `dcli-bootc flatpak sync -p <project>`.
 
 ## License
 

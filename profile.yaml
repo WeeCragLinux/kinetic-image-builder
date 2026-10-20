@@ -7,12 +7,13 @@ default_tag: latest
 # Keep every module listed here so the configurator can offer app/removal choices.
 # Removals and app modules stay disabled until the user selects choices.
 # Removals is listed first so it runs before base and app modules when selected.
-# Base, RPMFusion, and Terra start enabled; the configurator can offer to disable
-# either repo module when unneeded.
+# Base and RPMFusion start enabled; the configurator can offer to disable
+# RPMFusion when no selected app needs it.
 enabled_modules:
 #- removals
 - base
 - rpmfusion
+#- mangohud
 #- browsers
 #- content
 #- file-managers

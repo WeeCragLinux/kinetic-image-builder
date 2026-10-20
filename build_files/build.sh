@@ -11,6 +11,10 @@ set -euo pipefail
 mkdir -p /var/opt
 dnf5 -y copr enable theblackdon/dcli-bootc
 
+dnf install -y \
+    tmux \
+    dcli-bootc
+
 # post script (base)
 rm -f /opt
 mv /var/opt /opt
@@ -20,10 +24,6 @@ systemctl enable --force bootc-fetch-apply-updates.timer
 
 # pre script (rpmfusion)
 dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
-# === terra: Terra repositories (mangohud, gamescope and other Terra packages come from these) ===
-sed -i 's/enabled=0/enabled=1/' /etc/yum.repos.d/terra.repo
-sed -i 's/enabled=0/enabled=1/' /etc/yum.repos.d/terra-extras.repo
 
 # === cleanup ===
 dnf clean all && rm -rf /var/cache/dnf/*

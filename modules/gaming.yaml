@@ -1,7 +1,6 @@
 description: choose your gaming apps here
 packages:
- #- mangohud
- #- goverlay
+ # MangoHud and Goverlay live in the separate mangohud module.
  # preinstalled in base image — uncomment to layer anyway (needs RPMFusion nonfree):
  #- steam
  #- lutris
