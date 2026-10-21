@@ -13,4 +13,6 @@ remove:
  #- krdc
  #- krfb
  #- kwalletmanager5
+ #- kjournald
+ #- terra-mangohud #Remove this if you want to install mangohud from fedora Repos
 
