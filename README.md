@@ -40,28 +40,25 @@ package is selected for both removal and installation, the later app module
 installs it afterward.
 
 No packages are removed by default, so preinstalled apps from the base image
-remain unless selected for removal. Alacritty remains installed as a fallback
-terminal. The optional removals module offers Dolphin, Spectacle, Konsole, and
-KWrite; each removal choice is commented out until selected. The
-`file-managers`, `terminals`, `text-editors`, and `screenshot-tools` modules are
-also opt-in.
+remain unless selected for removal. Steam is preinstalled, and Alacritty
+remains installed as a fallback terminal. The optional removals module offers
+Dolphin, Spectacle, Konsole, KWrite, Kate, and several KDE extras, plus
+`terra-mangohud` if you want Fedora's `mangohud`; each removal choice is
+commented out until selected. The `browsers`, `content`, `gaming`, `comms`,
+`terminals`, `lgl-tools`, and `flatpak` modules are also opt-in.
 
 | Module | Contents | Needs `rpmfusion`? |
 |---|---|---|
-| `removals` | Optional removal of preinstalled Dolphin, Spectacle, Konsole, and KWrite; none by default | no |
-| `base` | update timer. Always on. | no |
+| `removals` | Optional removal of preinstalled Dolphin, Spectacle, Konsole, KWrite, Kate, and KDE extras (`kdebugsettings`, `kfind`, `krdc`, `krfb`, `kwalletmanager5`), plus `terra-mangohud`; none by default | no |
+| `base` | tmux, dcli-bootc, the dcli-bootc COPR, and the update timer. Always on. | no |
 | `rpmfusion` | RPMFusion free + nonfree repos. Enabled by default; disable if no selected app needs them. | — (it *is* the repos) |
-| `browsers` | helium, chromium, firefox, brave-browser, brave-origin, vivaldi | Brave and Vivaldi need their vendor repo enabled alongside the app |
-| `content` | obs-studio, audacity, kdenlive, gimp, pavucontrol, easyeffects, vlc, mpv, Spotify flatpak | yes (vlc, mpv) |
-| `file-managers` | Thunar, Nautilus, PCManFM-Qt, Dolphin (commented out) | no |
-| `gaming` | prismlauncher, ProtonPlus, steam, lutris (all commented out by default) | yes (if steam uncommented) |
-| `mangohud` | Fedora MangoHud + Goverlay (commented out by default) | no |
-| `comms` | telegram, thunderbird, discord (commented) | yes (if discord uncommented) |
-| `terminals` | kitty, konsole, foot, ghostty (commented out); Alacritty remains installed as a fallback | no |
-| `text-editors` | KWrite, Kate, GNOME Text Editor, Mousepad (commented out) | no |
-| `screenshot-tools` | Flameshot, Shutter, Spectacle (commented out) | no |
-| `dev` | Zed Flatpak (commented out) | no |
-| `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Keychron Helper, Papercutter, Scheduler Manager | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |
+| `browsers` | helium-bin (needs the `imput/helium` COPR), chromium, firefox, brave-browser, brave-origin, vivaldi-stable | Brave and Vivaldi need their vendor repo enabled alongside the app |
+| `content` | audacity, kdenlive, gimp, pavucontrol, vlc, mpv | yes (vlc, mpv) |
+| `gaming` | Steam is preinstalled in the base image; optional mangohud, goverlay, lutris; ProtonPlus and PrismLauncher Flatpaks. Enables the `linuxgamerlife/lgl-essentials` COPR for mangohud and goverlay | no |
+| `comms` | telegram-desktop, thunderbird, discord (commented) | only discord (nonfree) |
+| `terminals` | kitty, foot, ghostty (commented out); Alacritty remains installed as a fallback | no |
+| `lgl-tools` | LGL System Loadout, Colour Picker, DNF Helper, Emoji Picker, Papercutter, Scheduler Manager (from the `linuxgamerlife/lgl-toolkit` COPR) | no (Scheduler Manager also needs `scx-tools` and `scx-scheds` from `bieszczaders/kernel-cachyos-addons`) |
+| `flatpak` | opt-in Flatpaks: Spotify, EasyEffects, ProtonPlus, PrismLauncher, Zed, OBS Studio, Discord | no |
 
 LGL System Loadout's kernel-changing feature does not work with this bootc-based
 image. Do not use it to switch kernels.
@@ -126,7 +123,8 @@ one-line `base_image:` edit above always works regardless.
   bash scripts/apply-fastfetch-config.sh --system  # also /etc default (needs sudo)
   ```
   The script also offers bash auto-run in new terminals.
-- **Flatpaks:** listed under `flatpaks:` per module (see Spotify in `content`).
+- **Flatpaks:** most are listed in `modules/flatpak.yaml`; `gaming` also has
+  its own ProtonPlus and PrismLauncher entries.
   `dcli-bootc` installs them with `flatpak --user` into the invoking user's
   home; they are deliberately not baked into the image, because `/var/lib/flatpak`
   is machine-local state under bootc. Run `dcli-bootc build` as your normal

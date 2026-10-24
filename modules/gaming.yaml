@@ -1,8 +1,11 @@
 description: choose your gaming apps here
+repos:
+  copr:
+  - linuxgamerlife/lgl-essentials
 packages:
- # MangoHud and Goverlay live in the separate mangohud module.
- # preinstalled in base image — uncomment to layer anyway (needs RPMFusion nonfree):
- #- steam
+ # Steam installed in the base image.
+ #- mangohud
+ #- goverlay
  #- lutris
 flatpaks:
   #- com.vysp3r.ProtonPlus

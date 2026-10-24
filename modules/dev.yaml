@@ -1,7 +1,0 @@
-description: choose your development tools here
-packages: []
-flatpaks:
- #- dev.zed.Zed
-scripts:
-  post:
-

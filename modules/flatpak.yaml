@@ -1,0 +1,9 @@
+description: Choose your flatpak apps here
+flatpaks:
+#- com.spotify.Client
+#- com.github.wwmm.easyeffects
+#- com.vysp3r.ProtonPlus
+#- org.prismlauncher.PrismLauncher
+#- dev.zed.Zed
+#- com.obsproject.Studio
+#- com.discordapp.Discord

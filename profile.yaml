@@ -13,16 +13,12 @@ enabled_modules:
 #- removals
 - base
 - rpmfusion
-#- mangohud
 #- browsers
 #- content
-#- file-managers
 #- gaming
 #- comms
 #- terminals
-#- text-editors
-#- screenshot-tools
-#- dev
 #- lgl-tools
+#- flatpak
 package_manager: dnf
 dotfiles: []
